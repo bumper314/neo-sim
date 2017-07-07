@@ -1,0 +1,53 @@
+@font-face {
+	font-family: NeoSmall;
+	src: url('NeoSmall.ttf');
+}
+@font-face {
+	font-family: NeoMedium;
+	src: url('NeoMedium.ttf');
+}
+@font-face {
+	font-family: NeoLarge;
+	src: url('NeoLarge.ttf');
+}
+textarea {
+	resize: none;
+	width: 622px;
+	height: 150px;
+	margin: 0;
+	padding: 4px;
+	color: #555;
+	background-color: #a4b99f;
+	border-radius: 6px;
+	border-color: rgba(0,0,0,0.6);
+	box-shadow: inset 0 0 10px #000000;
+	overflow: hidden;
+}
+textarea:focus {
+	outline: none;
+}
+textarea.small {
+	font-family: NeoSmall;
+	font-size: 30pt;
+	line-height: 24px;
+}
+textarea.medium {
+	font-family: NeoMedium;
+	font-size: 30pt;
+	line-height: 28px;
+}
+textarea.large {
+	font-family: NeoLarge;
+	font-size: 30pt;
+	line-height: 36px;
+}
+.hidden {
+	display: none;
+}
+table {
+	margin: 30px auto;
+	background-image: url('NeoBase.svg');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center; 
+}
