@@ -1,10 +1,14 @@
 var fonts = [];
-var font_idx = 0;
+var font_idx = getCookie("font_idx", 0);
 var menu_idx = 0;
+var file = document.getElementById('file_1');
+var menu = document.getElementById("menu_choose_font");
 
 setupFont("NeoSmall", "Small", 6);
 setupFont("NeoMedium", "Medium", 5);
 setupFont("NeoLarge", "Large", 4);
+setFontByIndex(font_idx);
+showFile();
 
 function setupFont(font, name, lines) {
 	var tmp = {};
@@ -13,11 +17,6 @@ function setupFont(font, name, lines) {
 	tmp.lines = lines;
 	fonts.push(tmp);
 }
-
-var file = document.getElementById('file_1');
-var menu = document.getElementById("menu_choose_font");
-
-showFile();
 
 function showFile() {
 	file.style.display = 'block';
@@ -45,6 +44,8 @@ function bounded(idx, min, max) {
 
 function setFontByIndex(idx) {
 	font_idx = bounded(idx);
+	setCookie("font_idx", font_idx);
+	
 	var font = fonts[font_idx];
 	file.style.fontFamily = font.font;
 	file.className = font.name;
@@ -86,4 +87,30 @@ function drawFontMenu() {
 		menu.value += ' ' + ((i == menu_idx) ? '|' : ' ') + '-' + ((i == font_idx) ? '+' : ' ');
 		menu.value += fonts[i].name + " (" + fonts[i].lines + " lines)\n";
 	}
+}
+
+function setCookie(cname, cvalue) {
+	setCookieExpires(cname, cvalue, 20*365); // 20 years
+}
+
+function setCookieExpires(cname, cvalue, exdays) {
+	var d = new Date();
+	d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+	var expires = "expires="+d.toUTCString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname, dvalue) {
+	var name = cname + "=";
+	var ca = document.cookie.split(';');
+	for(var i = 0; i < ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
+	return dvalue;
 }
