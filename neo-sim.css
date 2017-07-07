@@ -23,6 +23,14 @@ textarea {
 	box-shadow: inset 0 0 10px #000000;
 	overflow: hidden;
 }
+::selection {
+	background-color: #777; /* Not sure why #555 is too dark */
+	color: #a4b99f;
+}
+::-moz-selection {
+	background-color: #555;
+	color: #a4b99f;
+}
 textarea:focus {
 	outline: none;
 }
