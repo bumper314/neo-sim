@@ -40,7 +40,7 @@ textarea:focus {
 textarea.small {
 	font-family: NeoSmall;
 	font-size: 30pt;
-	line-height: 24px;
+	line-height: 23px;
 }
 textarea.medium {
 	font-family: NeoMedium;
@@ -50,7 +50,7 @@ textarea.medium {
 textarea.large {
 	font-family: NeoLarge;
 	font-size: 30pt;
-	line-height: 36px;
+	line-height: 35px;
 }
 .hidden {
 	display: none;
