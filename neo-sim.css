@@ -10,11 +10,14 @@
 	font-family: NeoLarge;
 	src: url('NeoLarge.ttf');
 }
+body {
+	background-color: #536c6a; /* Neo2 #383e4a */
+}
 textarea {
 	resize: none;
 	width: 622px;
 	height: 150px;
-	margin: 0;
+	margin: 220px 0;
 	padding: 4px;
 	color: #555;
 	background-color: #a4b99f;
