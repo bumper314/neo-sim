@@ -1,6 +1,7 @@
 var fonts = [];
 var font_idx = getCookie("font_idx", 0);
 var menu_idx = 0;
+var file_idx = 0;
 var file = document.getElementById('file_1');
 var menu = document.getElementById("menu_choose_font");
 
@@ -8,7 +9,9 @@ setupFont("NeoSmall", "Small", 6);
 setupFont("NeoMedium", "Medium", 5);
 setupFont("NeoLarge", "Large", 4);
 setFontByIndex(font_idx);
-showFile();
+
+showSplashDelay("#splash_screen", 2000, function(){ showFileByIndex(file_idx, true)});
+
 
 function setupFont(font, name, lines) {
 	var tmp = {};
@@ -18,11 +21,15 @@ function setupFont(font, name, lines) {
 	fonts.push(tmp);
 }
 
-function showFile() {
-	file.style.display = 'block';
-	menu.style.display = 'none';
-	setupFileBindings();
-	file.focus();
+function showFileByIndex(fidx /* unused for now */, with_transition) {
+	if(with_transition) {
+		showSplashDelay("#splash_file_1", 1500, function(){ showFileByIndex(fidx, false)});
+	} else {
+		file.style.display = 'block';
+		menu.style.display = 'none';
+		setupFileBindings();
+		file.focus();
+	}
 }
 
 function setupFileBindings() {
@@ -59,7 +66,7 @@ function showFontMenu() {
 	
 	Mousetrap.reset();
 	Mousetrap.bindGlobal('esc', function(e) {
-		showFile();
+		showFileByIndex(file_idx, false);
 		return false;
 	});
 	Mousetrap.bindGlobal('down', function(e) {
@@ -74,9 +81,23 @@ function showFontMenu() {
 	});
 	Mousetrap.bindGlobal('enter', function(e) {
 		setFontByIndex(menu_idx);
-		showFile();
+		showFileByIndex(file_idx, false);
 		return false;
 	});
+}
+
+// Show the contents of a selector in the menu textarea
+// Call callback after delay, which presumably is the next "show" call
+function showSplashDelay(sel, delay, callback) {
+	var s = document.querySelector(sel);
+	if (s) {
+		file.style.display = 'none';
+		menu.style.display = 'block';		
+		menu.value = s.innerHTML;
+		setTimeout(callback, delay);
+	} else {
+	  callback();
+	}
 }
 
 function drawFontMenu() {
